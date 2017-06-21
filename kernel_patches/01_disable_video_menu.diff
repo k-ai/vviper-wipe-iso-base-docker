@@ -1,0 +1,11 @@
+--- linux-4.4.44/arch/x86/boot/video.c	2017-03-29 01:21:19.774047884 +0000
++++ linux-4.4.44/arch/x86/boot/video.c	2017-03-29 01:21:19.774047884 +0000
+@@ -328,7 +328,7 @@
+ 
+ 	for (;;) {
+ 		if (mode == ASK_VGA)
+-			mode = mode_menu();
++			mode = VIDEO_CURRENT_MODE;
+ 
+ 		if (!set_mode(mode))
+ 			break;

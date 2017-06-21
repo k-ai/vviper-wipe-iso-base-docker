@@ -1,0 +1,39 @@
+#!/bin/sh
+
+# System initialization sequence:
+#
+# /init (this file)
+#  |
+#  +--(1) /etc/01_prepare.sh
+#  |
+#  +--(2) /etc/02_overlay.sh
+#          |
+#          +-- /etc/03_init.sh
+#               |
+#               +-- /sbin/init
+#                    |
+#                    +--(1) /etc/04_bootscript.sh
+#                    |       |
+#                    |       +-- udhcpc
+#                    |           |
+#                    |           +-- /etc/05_rc.udhcp
+#                    |
+#                    +--(2) /bin/sh (Alt + F1, main console)
+#                    |
+#                    +--(2) /bin/sh (Alt + F2)
+#                    |
+#                    +--(2) /bin/sh (Alt + F3)
+#                    |
+#                    +--(2) /bin/sh (Alt + F4)
+# Let's mount all core file systems.
+/etc/01_prepare.sh
+
+# Create new mountpoint in RAM, make it our new root location and overlay it
+# with our storage area (if overlay area exists at all). This operation invokes
+# the script '/etc/03_init.sh' as the new init process.
+exec /etc/02_overlay.sh
+
+echo "(/init) - you can never see this unless there is a serious bug..."
+
+# Wait until any key has been pressed.
+read -n1 -s

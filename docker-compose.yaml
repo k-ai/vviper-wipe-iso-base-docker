@@ -1,0 +1,5 @@
+vviper-wipe-iso-base:
+  build: .
+  #entrypoint: /bin/bash
+  volumes:
+    - ./output:/minimal/output

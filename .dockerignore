@@ -1,0 +1,6 @@
+*
+!*.sh
+!rootfs_merge
+!rootfs_merge/**
+!kernel_patches
+!kernel_patches/**
